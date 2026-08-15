@@ -1,5 +1,6 @@
 ## Azure Functions local settings (contains secrets - never commit)
 local.settings.json
+local.settings.json.example
 
 ## .NET build artifacts
 bin/
