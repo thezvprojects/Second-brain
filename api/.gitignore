@@ -1,0 +1,11 @@
+## Azure Functions local settings (contains secrets - never commit)
+local.settings.json
+
+## .NET build artifacts
+bin/
+obj/
+
+## Rider / VS
+.vs/
+.idea/
+*.user
