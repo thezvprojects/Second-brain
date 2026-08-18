@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="item-form">
+  <h2>Add Item</h2>
+
+  <div class="field">
+    <label for="itemType">Type</label>
+    <select id="itemType" formControlName="itemType">
+      <option value="note">Note</option>
+      <option value="link">Link</option>
+      <option value="book">Book</option>
+      <option value="idea">Idea</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="title">Title *</label>
+    <input id="title" type="text" formControlName="title" placeholder="Item title" />
+    @if (form.get('title')?.invalid && form.get('title')?.touched) {
+      <span class="error">Title is required (max 200 characters).</span>
+    }
+  </div>
+
+  <div class="field">
+    <label for="content">Content</label>
+    <textarea id="content" formControlName="content" rows="3" placeholder="Optional notes..."></textarea>
+  </div>
+
+  <div class="field">
+    <label for="url">URL</label>
+    <input id="url" type="url" formControlName="url" placeholder="https://..." />
+    @if (form.get('url')?.invalid && form.get('url')?.touched) {
+      <span class="error">Must be a valid URL.</span>
+    }
+  </div>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <button type="submit" [disabled]="form.invalid || submitting">
+    {{ submitting ? 'Saving…' : 'Save' }}
+  </button>
+</form>

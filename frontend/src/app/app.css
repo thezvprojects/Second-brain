@@ -1,0 +1,16 @@
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: system-ui, sans-serif;
+}
+
+h1 {
+  margin-bottom: 24px;
+}
+
+hr {
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid #e0e0e0;
+}

@@ -1,0 +1,22 @@
+# Azure Functions local settings (contains secrets - never commit)
+local.settings.json
+local.settings.json.example
+
+## .NET build artifacts
+bin/
+obj/
+
+## Rider / VS
+.vs/
+.idea/
+*.user
+
+## Node / Angular
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+## OS
+.DS_Store
+Thumbs.db

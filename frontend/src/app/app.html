@@ -1,0 +1,6 @@
+<main class="container">
+  <h1>Second Brain</h1>
+  <app-item-form (itemCreated)="onItemCreated($event)" />
+  <hr />
+  <app-item-list [items]="items" [loading]="loading" [error]="listError" />
+</main>

@@ -1,0 +1,41 @@
+name: Deploy API to Azure Functions
+
+# Runs automatically whenever you push to main
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'api/**'          # Only triggers when something in /api changes
+      - '.github/workflows/deploy-api.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository code onto the runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install the .NET 8 SDK so we can build the Functions project
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Step 3: Build & publish the project into a folder called 'output'
+      # --configuration Release  → optimised build (no debug symbols)
+      # --output ./output        → where the compiled files land
+      - name: Build and publish
+        run: dotnet publish api/api.csproj --configuration Release --output ./output
+
+      # Step 4: Deploy the published output to your Azure Function App
+      # The publish profile is a credential file you download from the Portal
+      # and store as a GitHub secret (see README / instructions below)
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: second-brain-api
+          package: ./output
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}

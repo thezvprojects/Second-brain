@@ -1,0 +1,41 @@
+.item-list ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badge {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+time {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+a {
+  color: #1976d2;
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.error { color: #d32f2f; }
+.empty { color: #888; }
