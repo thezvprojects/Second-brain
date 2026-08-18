@@ -1,0 +1,27 @@
+<section class="item-list">
+  <h2>Items</h2>
+
+  @if (loading) {
+    <p>Loading…</p>
+  } @else if (error) {
+    <p class="error">{{ error }}</p>
+  } @else if (items.length === 0) {
+    <p class="empty">No items yet. Add one above!</p>
+  } @else {
+    <ul>
+      @for (item of items; track item.id) {
+        <li class="item-card">
+          <span class="badge">{{ item.itemType }}</span>
+          <strong>{{ item.title }}</strong>
+          @if (item.content) {
+            <p>{{ item.content }}</p>
+          }
+          @if (item.url) {
+            <a [href]="item.url" target="_blank" rel="noopener">{{ item.url }}</a>
+          }
+          <time>{{ item.createdAt | date:'medium' }}</time>
+        </li>
+      }
+    </ul>
+  }
+</section>

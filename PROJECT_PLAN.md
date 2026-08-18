@@ -2,21 +2,23 @@
 
 ## Phase 0: Bare-minimum vertical slice (Angular form → Function → SQL → back to Angular)
 
-- [ ] Create the Resource Group in the Azure Portal — *Azure resource organization: one container for everything, easy teardown*
-- [ ] Provision Azure SQL Server + Database (serverless, free offer, firewall rules) — *Azure SQL: logical server vs. database, serverless tier, firewall config*
-- [ ] Create the `Items` table via Query Editor/SSMS (Id, ItemType, Title, Content/Url, CreatedAt) — *T-SQL DDL, connecting to Azure SQL with a client tool*
-- [ ] Scaffold the Functions project locally (isolated worker template) — *Azure Functions project structure: host.json, local.settings.json, isolated worker model*
-- [ ] Implement `POST /items` HTTP trigger using Dapper + parameterized SQL — *HTTP trigger bindings, parameterized queries (SQL injection prevention)*
-- [ ] Implement `GET /items` HTTP trigger — *Route/query bindings, JSON serialization, async/await*
-- [ ] Provision the Function App (Consumption plan) + Storage Account in the Portal — *Why Functions require a storage account, Consumption plan basics, bundling App Insights*
-- [ ] Deploy the Functions project to Azure (VS Code extension or `func azure functionapp publish`) — *Functions deployment workflow*
-- [ ] Add the SQL connection string as an Application Setting; test deployed endpoints with curl/Postman — *App Settings vs. local.settings.json, connection string handling*
-- [ ] Scaffold the Angular app (`ng new`) — *Angular CLI, project/module structure*
-- [ ] Build an Angular form component (Reactive Forms) calling `POST /items` — *Reactive Forms, HttpClient, services/DI*
-- [ ] Build an Angular list component calling `GET /items` — *HttpClient GET, `@for`/`*ngFor`, observables*
-- [ ] Wire up `environment.ts`/`environment.prod.ts` for the API URL — *Angular build configurations/environments*
+- [x] Create the Resource Group in the Azure Portal — *Azure resource organization: one container for everything, easy teardown*
+- [x] Provision Azure SQL Server + Database (serverless, free offer, firewall rules) — *Azure SQL: logical server vs. database, serverless tier, firewall config*
+- [x] Create the `Items` table via Query Editor/SSMS (Id, ItemType, Title, Content/Url, CreatedAt) — *T-SQL DDL, connecting to Azure SQL with a client tool*
+- [x] Scaffold the Functions project locally (isolated worker template) — *Azure Functions project structure: host.json, local.settings.json, isolated worker model*
+- [x] Implement `POST /items` HTTP trigger using Dapper + parameterized SQL — *HTTP trigger bindings, parameterized queries (SQL injection prevention)*
+- [x] Implement `GET /items` HTTP trigger — *Route/query bindings, JSON serialization, async/await*
+- [x] Provision the Function App (Consumption plan) + Storage Account in the Portal — *Why Functions require a storage account, Consumption plan basics, bundling App Insights*
+- [x] Add CI/CD: GitHub Actions workflow deploys API to `second-brain-api` on push to `main` — *Functions deployment workflow, GitHub Actions, publish profile secret*
+- [ ] Add the SQL connection string as an Application Setting; test deployed endpoints with curl/Postman — *App Settings vs. local.settings.json, connection string handling* *(manual — add `SqlConnectionString` in Azure Portal → Function App → Environment variables)*
+- [x] Scaffold the Angular app (`ng new`) — *Angular CLI, project/module structure*
+- [x] Build an Angular form component (Reactive Forms) calling `POST /items` — *Reactive Forms, HttpClient, services/DI*
+- [x] Build an Angular list component calling `GET /items` — *HttpClient GET, `@for`/`*ngFor`, observables*
+- [x] Wire up `environment.ts`/`environment.prod.ts` for the API URL — *Angular build configurations/environments*
 - [ ] Provision the Static Web App (free tier), link GitHub repo, verify auto-deploy — *Azure SWA free tier hosting + built-in GitHub Actions CI/CD*
 - [ ] Configure CORS on the Function App to allow the SWA origin; verify the full round trip through the deployed SWA URL — *Functions CORS config, browser same-origin policy*
+
+> 💡 **Planned improvement:** Migrate data access from Dapper to EF Core + LINQ (see GitHub Issue #2). Currently Dapper is used with raw SQL; EF Core will replace it for type-safe, testable queries and schema migrations.
 
 ## Phase 1: Polish (auth, validation, error handling, CI/CD)
 
@@ -30,9 +32,10 @@
 - [ ] Add structured logging via `ILogger`, query it in Application Insights — *Azure Monitor/Log Analytics, KQL basics, observability*
 - [ ] Add automated tests: xUnit for Function handlers (mocked DB), Jasmine/Jest for Angular components — *Testing patterns, designing for testability/DI*
 - [ ] Track schema changes with versioned SQL scripts (or EF Core Migrations) instead of ad-hoc Portal edits — *Database change management/reproducibility*
-- [ ] Add a GitHub Actions workflow to build/deploy the Function App on push — *CI/CD pipelines, GitHub Actions YAML, Azure deployment credentials as secrets*
+- [x] Add a GitHub Actions workflow to build/deploy the Function App on push — *CI/CD pipelines, GitHub Actions YAML, Azure deployment credentials as secrets*
 - [ ] Set an Application Insights daily data cap + one basic alert rule (e.g. failure rate) — *Azure Monitor alerting, cost control*
-- [ ] Do a secrets-hygiene pass: confirm `local.settings.json`/environment secrets are gitignored, nothing committed — *Secrets management, basic secure-config hygiene*
+- [x] Do a secrets-hygiene pass: confirm `local.settings.json`/environment secrets are gitignored, nothing committed — *Secrets management, basic secure-config hygiene*
+- [ ] Migrate data access from Dapper to EF Core + LINQ queries (see Issue #2) — *EF Core DbContext, LINQ, type-safe queries, EF Migrations replacing ad-hoc SQL scripts*
 
 ## Phase 2+: AI features (not detailed yet)
 
